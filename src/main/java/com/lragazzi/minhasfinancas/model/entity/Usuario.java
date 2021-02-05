@@ -10,18 +10,18 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+//import lombok.EqualsAndHashCode;
+//import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+//import lombok.Setter;
+//import lombok.ToString;
 
 @Entity
 @Table(name = "usuario", schema = "financeiro")
 @Builder
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor //Cria um construtor vazio
+@AllArgsConstructor //Cria um construtor com todos os atributos
 public class Usuario {
 	
 	@Id

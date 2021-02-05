@@ -17,8 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.lragazzi.minhasfinancas.model.entity.Usuario;
 
 @RunWith(SpringRunner.class)
-//@ActiveProfiles("test") - usado para trabalhar com prop banco h2
-@DataJpaTest
+//@ActiveProfiles("test") // usado para trabalhar com prop banco h2
+@DataJpaTest //Executa rollback após executar o teste, garantindo a integridade dos dados
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class UsuarioRepositoryTest {
 

@@ -21,13 +21,17 @@ import javax.persistence.Table;
 import com.lragazzi.minhasfinancas.model.enums.StatusLancamento;
 import com.lragazzi.minhasfinancas.model.enums.TipoLancamento;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "usuario", schema = "financeiro")
+@Table(name = "lancamento", schema = "financeiro")
 @Builder
 @Data
+@NoArgsConstructor //Cria um construtor vazio
+@AllArgsConstructor //Cria um construtor com todos os atributos
 public class Lancamento {
 	
 	@Id
