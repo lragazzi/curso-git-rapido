@@ -1,8 +1,12 @@
 package com.lragazzi.minhasfinancas.api.resource;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +16,16 @@ import com.lragazzi.minhasfinancas.api.dto.UsuarioDTO;
 import com.lragazzi.minhasfinancas.exception.ErroAutenticacao;
 import com.lragazzi.minhasfinancas.exception.RegraNegocioException;
 import com.lragazzi.minhasfinancas.model.entity.Usuario;
+import com.lragazzi.minhasfinancas.model.repository.LancamentoRepository;
+import com.lragazzi.minhasfinancas.service.LancamentoService;
 import com.lragazzi.minhasfinancas.service.UsuarioService;
+
+import lombok.RequiredArgsConstructor;
 
 
 @RestController
 @RequestMapping("/api/usuarios")
+@RequiredArgsConstructor //cria o construtor da classe que inicializa o usuarioService
 public class UsuarioResource {
 	
 //	@GetMapping("/")
@@ -24,12 +33,9 @@ public class UsuarioResource {
 //		return "hello word!";
 //	}
 
-	private UsuarioService usuarioService;
+	private final UsuarioService usuarioService;
+	private final LancamentoService lancamentoService;
 	
-	public UsuarioResource(UsuarioService usuarioService){
-		this.usuarioService = usuarioService;
-	}
-
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar(@RequestBody UsuarioDTO usuarioDTO){
 		
@@ -62,6 +68,20 @@ public class UsuarioResource {
 
 	}
 	
+	@GetMapping("{id}/saldo")
+	public ResponseEntity obterSaldo(@PathVariable("id") Long id){
+
+	   Optional<Usuario> usuario = usuarioService.obterPorId(id);
+	   
+	   if(!usuario.isPresent()){
+		   return new ResponseEntity(HttpStatus.NOT_FOUND);
+	   }
+
+	   BigDecimal saldo = lancamentoService.obterSaldoPorUsuario(id);
+		
+	   return ResponseEntity.ok(saldo);
+
+	}
 	
 	
 }

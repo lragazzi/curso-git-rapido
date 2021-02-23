@@ -5,6 +5,7 @@ import java.sql.Date;
 //import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 //import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.data.convert.Jsr310Converters;
 
 //import org.springframework.data.convert.Jsr310Converters;
 
@@ -51,9 +54,9 @@ public class Lancamento {
 	@Column(name = "valor")
 	private BigDecimal valor;
 	
-	@Column(name = "dtCadastro")
-	//@Convert(converter = Jsr310Converters.LocalDateToDateConverter.class)
-	private Date dtCadastro;
+//	@Column(name = "dtCadastro")
+//	@Convert(converter = Jsr310Converters.LocalDateToDateConverter.class)
+//	private Date dtCadastro;
 	
 	@Column(name = "tipo")
 	@Enumerated(value = EnumType.STRING)
@@ -64,7 +67,7 @@ public class Lancamento {
 	private StatusLancamento status; 
 	
 	@ManyToOne
-	@JoinColumn(name = "idUsuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 
